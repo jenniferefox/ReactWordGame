@@ -18,7 +18,7 @@ function App() {
 }
 
 function Square() {
-
+  <input className='square' type='text' maxLength={1}/>
 }
 
 function Grid() {
