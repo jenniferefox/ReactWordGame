@@ -41,15 +41,16 @@ function Grid() {
   })
   };
 
-function Key() {
-  const [value, setValue] = useState(null)
+function Key({legend}) {
 
   function handleKey(x) {
-    console.log('hi');
+    console.log(x);
   }
 
   return (
-    <button className='key' value={value} onClick={e => handleKey(e.target.value)}/>
+    <button className='key' onClick={handleKey}>
+    {legend}
+    </button>
   )
 }
 
@@ -63,7 +64,7 @@ function Keyboard () {
   return keys.map((row) => {
     return (
       <div className='key-row'>
-        {row.map((key) => <button className='key'>{key}</button>)}
+        {row.map((key) => <Key legend={key}/>)}
       </div>
     )
   });
