@@ -22,49 +22,49 @@ function Square() {
 }
 
 function Grid() {
-  return (
+  return(
     <>
     <div className='grid-row'>
-      <Square />
-      <Square />
-      <Square />
-      <Square />
-      <Square />
+      <input className="square"></input>
+      <input className="square"></input>
+      <input className="square"></input>
+      <input className="square"></input>
+      <input className="square"></input>
     </div>
     <div className='grid-row'>
-      <Square />
-      <Square />
-      <Square />
-      <Square />
-      <Square />
+      <input className="square"></input>
+      <input className="square"></input>
+      <input className="square"></input>
+      <input className="square"></input>
+      <input className="square"></input>
     </div>
     <div className='grid-row'>
-      <Square />
-      <Square />
-      <Square />
-      <Square />
-      <Square />
+      <input className="square"></input>
+      <input className="square"></input>
+      <input className="square"></input>
+      <input className="square"></input>
+      <input className="square"></input>
     </div>
     <div className='grid-row'>
-      <Square />
-      <Square />
-      <Square />
-      <Square />
-      <Square />
+      <input className="square"></input>
+      <input className="square"></input>
+      <input className="square"></input>
+      <input className="square"></input>
+      <input className="square"></input>
     </div>
     <div className='grid-row'>
-      <Square />
-      <Square />
-      <Square />
-      <Square />
-      <Square />
+      <input className="square"></input>
+      <input className="square"></input>
+      <input className="square"></input>
+      <input className="square"></input>
+      <input className="square"></input>
     </div>
     <div className='grid-row'>
-      <Square />
-      <Square />
-      <Square />
-      <Square />
-      <Square />
+      <input className="square"></input>
+      <input className="square"></input>
+      <input className="square"></input>
+      <input className="square"></input>
+      <input className="square"></input>
     </div>
     </>
   )
