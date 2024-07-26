@@ -19,7 +19,13 @@ function App() {
 }
 
 function Square() {
-  <input className='square' type='text' maxLength={1}/>
+  const onChange = (e) => {
+    console.log(e.target.value)
+  };
+
+  return (
+  <input className='square' type='text' maxLength={1} onChange={onChange}/>
+  );
 }
 
 function Grid() {
