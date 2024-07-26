@@ -29,53 +29,17 @@ function Square() {
 }
 
 function Grid() {
-  return(
-    <>
-    <div className='grid-row'>
-      <Square />
-      <Square />
-      <Square />
-      <Square />
-      <Square />
-    </div>
-    <div className='grid-row'>
-      <Square />
-      <Square />
-      <Square />
-      <Square />
-      <Square />
-    </div>
-    <div className='grid-row'>
-      <Square />
-      <Square />
-      <Square />
-      <Square />
-      <Square />
-    </div>
-    <div className='grid-row'>
-      <Square />
-      <Square />
-      <Square />
-      <Square />
-      <Square />
-    </div>
-    <div className='grid-row'>
-      <Square />
-      <Square />
-      <Square />
-      <Square />
-      <Square />
-    </div>
-    <div className='grid-row'>
-      <Square />
-      <Square />
-      <Square />
-      <Square />
-      <Square />
-    </div>
-    </>
-  )
-}
+  const row_range = [...Array(6).keys()];
+  const col_range = [...Array(5).keys()];
+
+  return row_range.map((element) => {
+      return (
+        <div className='grid-row'>
+          {col_range.map((item) => <Square />)}
+        </div>
+      )
+  })
+  };
 
 function Key() {
   const [value, setValue] = useState(null)
