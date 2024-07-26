@@ -25,46 +25,46 @@ function Grid() {
   return(
     <>
     <div className='grid-row'>
-      <input className="square"></input>
-      <input className="square"></input>
-      <input className="square"></input>
-      <input className="square"></input>
-      <input className="square"></input>
+      <Square />
+      <Square />
+      <Square />
+      <Square />
+      <Square />
     </div>
     <div className='grid-row'>
-      <input className="square"></input>
-      <input className="square"></input>
-      <input className="square"></input>
-      <input className="square"></input>
-      <input className="square"></input>
+      <Square />
+      <Square />
+      <Square />
+      <Square />
+      <Square />
     </div>
     <div className='grid-row'>
-      <input className="square"></input>
-      <input className="square"></input>
-      <input className="square"></input>
-      <input className="square"></input>
-      <input className="square"></input>
+      <Square />
+      <Square />
+      <Square />
+      <Square />
+      <Square />
     </div>
     <div className='grid-row'>
-      <input className="square"></input>
-      <input className="square"></input>
-      <input className="square"></input>
-      <input className="square"></input>
-      <input className="square"></input>
+      <Square />
+      <Square />
+      <Square />
+      <Square />
+      <Square />
     </div>
     <div className='grid-row'>
-      <input className="square"></input>
-      <input className="square"></input>
-      <input className="square"></input>
-      <input className="square"></input>
-      <input className="square"></input>
+      <Square />
+      <Square />
+      <Square />
+      <Square />
+      <Square />
     </div>
     <div className='grid-row'>
-      <input className="square"></input>
-      <input className="square"></input>
-      <input className="square"></input>
-      <input className="square"></input>
-      <input className="square"></input>
+      <Square />
+      <Square />
+      <Square />
+      <Square />
+      <Square />
     </div>
     </>
   )
