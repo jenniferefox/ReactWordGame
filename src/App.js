@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
+import { useEffect, useState } from 'react';
 
 function App() {
   //Overall Screen
@@ -71,10 +72,11 @@ function Grid() {
 }
 
 function Key() {
-  return (
-    <button className='key'/>
-  )
-}
+  const [value, setValue] = useState(null)
+
+  function handleKey(x) {
+    console.log('hi');
+  }
 
   return (
     <button className='key' value={value} onClick={e => handleKey(e.target.value)}/>
@@ -95,5 +97,6 @@ function Keyboard () {
       </div>
     )
   });
+}
 
 export default App;
