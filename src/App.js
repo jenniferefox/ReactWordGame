@@ -2,24 +2,121 @@ import logo from './logo.svg';
 import './App.css';
 
 function App() {
+  //Overall Screen
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          You have 6 attempts to guess the correct 5 letter word.
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
       </header>
+      <Grid />
+      <p></p>
+      <Keyboard />
     </div>
   );
 }
+
+function Square() {
+
+}
+
+function Grid() {
+  return (
+    <>
+    <div className='grid-row'>
+      <Square />
+      <Square />
+      <Square />
+      <Square />
+      <Square />
+    </div>
+    <div className='grid-row'>
+      <Square />
+      <Square />
+      <Square />
+      <Square />
+      <Square />
+    </div>
+    <div className='grid-row'>
+      <Square />
+      <Square />
+      <Square />
+      <Square />
+      <Square />
+    </div>
+    <div className='grid-row'>
+      <Square />
+      <Square />
+      <Square />
+      <Square />
+      <Square />
+    </div>
+    <div className='grid-row'>
+      <Square />
+      <Square />
+      <Square />
+      <Square />
+      <Square />
+    </div>
+    <div className='grid-row'>
+      <Square />
+      <Square />
+      <Square />
+      <Square />
+      <Square />
+    </div>
+    </>
+  )
+}
+
+function Key() {
+  return (
+    <button className='key'/>
+  )
+}
+
+function Keyboard () {
+  return (
+    <>
+    <div className='key-row'>
+      <button className='key'>Q</button>
+      <button className='key'>Q</button>
+      <button className='key'>Q</button>
+      <button className='key'>Q</button>
+      <button className='key'>Q</button>
+      <button className='key'>Q</button>
+      <button className='key'>Q</button>
+      <button className='key'>Q</button>
+      <button className='key'>Q</button>
+      <button className='key'>Q</button>
+    </div>
+    <div className='key-row'>
+      <button className='key'>Q</button>
+      <button className='key'>Q</button>
+      <button className='key'>Q</button>
+      <button className='key'>Q</button>
+      <button className='key'>Q</button>
+      <button className='key'>Q</button>
+      <button className='key'>Q</button>
+      <button className='key'>Q</button>
+      <button className='key'>Q</button>
+    </div>
+    <div className='key-row'>
+      <button className='key'>Q</button>
+      <button className='key'>Q</button>
+      <button className='key'>Q</button>
+      <button className='key'>Q</button>
+      <button className='key'>Q</button>
+      <button className='key'>Q</button>
+      <button className='key'>Q</button>
+      <button className='key'>Q</button>
+      <button className='key'>Q</button>
+    </div>
+    </>
+  )
+}
+
+
 
 export default App;
