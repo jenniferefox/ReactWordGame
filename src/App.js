@@ -76,47 +76,24 @@ function Key() {
   )
 }
 
-function Keyboard () {
   return (
-    <>
-    <div className='key-row'>
-      <button className='key'>Q</button>
-      <button className='key'>Q</button>
-      <button className='key'>Q</button>
-      <button className='key'>Q</button>
-      <button className='key'>Q</button>
-      <button className='key'>Q</button>
-      <button className='key'>Q</button>
-      <button className='key'>Q</button>
-      <button className='key'>Q</button>
-      <button className='key'>Q</button>
-    </div>
-    <div className='key-row'>
-      <button className='key'>Q</button>
-      <button className='key'>Q</button>
-      <button className='key'>Q</button>
-      <button className='key'>Q</button>
-      <button className='key'>Q</button>
-      <button className='key'>Q</button>
-      <button className='key'>Q</button>
-      <button className='key'>Q</button>
-      <button className='key'>Q</button>
-    </div>
-    <div className='key-row'>
-      <button className='key'>Q</button>
-      <button className='key'>Q</button>
-      <button className='key'>Q</button>
-      <button className='key'>Q</button>
-      <button className='key'>Q</button>
-      <button className='key'>Q</button>
-      <button className='key'>Q</button>
-      <button className='key'>Q</button>
-      <button className='key'>Q</button>
-    </div>
-    </>
+    <button className='key' value={value} onClick={e => handleKey(e.target.value)}/>
   )
 }
 
+function Keyboard () {
+  const keys = [
+    ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
+    ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
+    ["Enter", "Z", "X", "C", "V", "B", "N", "M", "Del"],
+  ];
 
+  return keys.map((row) => {
+    return (
+      <div className='key-row'>
+        {row.map((key) => <button className='key'>{key}</button>)}
+      </div>
+    )
+  });
 
 export default App;
