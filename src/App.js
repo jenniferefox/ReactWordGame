@@ -25,10 +25,25 @@ function wordOfTheDay() {
   }
 
 function Game() {
+  const [{guess, prevGuess}, setGuess] = useState({ guess: "", prevGuess: []})
   const actual_word = wordOfTheDay()
   const onKey = (press) => {
-    console.log(press)
-  };
+    if (press === 'Backspace' || press === 'del') {
+      setGuess(g => ({...g,  guess: g.guess.slice(0, -1) }))
+    } else if (press === 'Enter') {
+      if (guess.length === actual_word.length) {
+        if (guess === wordOfTheDay()) {
+          console.log("YOU WIN!")
+          } else {
+            console.log("check against answer - placeholder")
+            // checkAgainstAnswer(guess, actual_word);
+          }
+        setGuess(g => ({guess: "", prevGuess: g.guess.push(guess)}))
+      }
+        } else if (press.match(/[a-z]/)) {
+          setGuess(g => ({...g, guess: g.guess + press}))
+        }
+    };
   return (
       <div>
         <Grid onKey={onKey}/>
