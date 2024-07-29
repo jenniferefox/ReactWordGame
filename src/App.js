@@ -3,7 +3,7 @@ import './App.css';
 import { useEffect, useState } from 'react';
 
 function App() {
-  //Overall Screen
+// Overall Screen
   return (
     <div className="App">
       <header className="App-header">
@@ -11,9 +11,9 @@ function App() {
           You have 6 attempts to guess the correct 5 letter word.
         </p>
       </header>
-      <Grid />
-      <p></p>
-      <Keyboard />
+      <div>
+      <Game className='Game'/>
+      </div>
     </div>
   );
 }
