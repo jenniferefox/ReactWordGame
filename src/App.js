@@ -37,14 +37,14 @@ function Square({onKey}) {
   );
 }
 
-function Grid() {
-  const row_range = [...Array(6).keys()];
-  const col_range = [...Array(5).keys()];
+function Grid({ onKey }) {
+  var row_size = [...Array(6).fill('')];
+  var col_size = [...Array(5).fill('')];
 
-  return row_range.map((element) => {
+  return row_size.map(() => {
       return (
         <div className='grid-row'>
-          {col_range.map((item) => <Square />)}
+          {col_size.map(() => <Square onKey={() => onKey()}/>)}
         </div>
       )
   })
