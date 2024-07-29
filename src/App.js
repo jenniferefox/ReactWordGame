@@ -18,9 +18,6 @@ function App() {
   );
 }
 
-function Square() {
-  const onChange = (e) => {
-    console.log(e.target.value)
 function Game() {
   const onKey = (press) => {
     console.log(press)
@@ -34,8 +31,9 @@ function Game() {
     )
 }
 
+function Square({onKey}) {
   return (
-  <input className='square' type='text' maxLength={1} onChange={onChange}/>
+  <div className='square' type='text' maxLength={1}  onChange={() => {onKey()}}/>
   );
 }
 
