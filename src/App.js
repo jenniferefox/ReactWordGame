@@ -59,7 +59,24 @@ function Key({ legend, onKey }) {
   )
 }
 
-function Keyboard () {
+function Keyboard ({ onKey }) {
+  useEffect(() => {
+    const handler = (e) => {
+      if (e.key === 'Backspace' || e.key === 'Delete') {
+        onKey('Backspace')
+      } else if (e.key === 'Enter') {
+        onKey("Enter")
+      } else if (e.key.match(/[a-zA-Z]/)) {
+        onKey(e.key)
+      };
+      };
+
+      document.addEventListener("keydown", handler);
+      return () => {
+        document.removeEventListener("keydown", handler);
+      }
+    }, []);
+
   const keys = [
     ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
     ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
@@ -69,7 +86,7 @@ function Keyboard () {
   return keys.map((row) => {
     return (
       <div className='key-row'>
-        {row.map((key) => <Key legend={key}/>)}
+        {row.map((key) => <Key legend={key} onKey={() => onKey(key.toLowerCase())}/>)}
       </div>
     )
   });
