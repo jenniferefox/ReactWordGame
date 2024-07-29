@@ -50,14 +50,10 @@ function Grid({ onKey }) {
   })
   };
 
-function Key({legend}) {
-
-  function handleKey(x) {
-    console.log(x);
-  }
+function Key({ legend, onKey }) {
 
   return (
-    <button className='key' onClick={handleKey}>
+    <button className='key' onClick={() => {onKey(legend)}}>
     {legend}
     </button>
   )
