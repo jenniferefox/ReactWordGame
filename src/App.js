@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import { useEffect, useState } from 'react';
+import { words } from './words.mjs';
 
 function App() {
 // Overall Screen
@@ -18,7 +19,14 @@ function App() {
   );
 }
 
+function wordOfTheDay() {
+  var now = new Date();
+  var fullDaysSinceEpoch = Math.floor(now/8.64e7);
+  return words[fullDaysSinceEpoch % words.length];
+  }
+
 function Game() {
+  const actual_word = wordOfTheDay()
   const onKey = (press) => {
     console.log(press)
   };
