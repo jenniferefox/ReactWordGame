@@ -35,14 +35,18 @@ function Game() {
         if (guess === wordOfTheDay()) {
           console.log("YOU WIN!")
           } else {
-            console.log("check against answer - placeholder")
-            // checkAgainstAnswer(guess, actual_word);
+            checkAgainstAnswer(guess, actual_word)
           }
         setGuess(g => ({guess: "", prevGuess: g.guess.push(guess)}))
       }
         } else if (press.match(/[a-z]/)) {
           setGuess(g => ({...g, guess: g.guess + press}))
         }
+    if (guess.length >= 5) {
+      alert('too many letters')
+      setGuess(g => ({...g,  guess: g.guess.slice(0, -1) }))
+    };
+    console.log(guess)
     };
   return (
       <div>
