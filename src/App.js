@@ -2,8 +2,9 @@ import './App.css';
 import { useEffect, useState } from 'react';
 import { words } from './words.mjs';
 
+// Overall Screen that displays header and Game
+
 function App() {
-// Overall Screen
   return (
     <div className="App">
       <header className="App-header">
@@ -18,11 +19,8 @@ function App() {
   );
 }
 
-function wordOfTheDay() {
-  var now = new Date();
-  var fullDaysSinceEpoch = Math.floor(now/8.64e7);
-  return words[fullDaysSinceEpoch % words.length];
-  }
+// Game contains all functionality for the game, processes keyboard input and displays the Grid and
+// Keyboard elements
 
 function Game() {
   const [{guess, prevGuess}, setGuess] = useState({ guess: "", prevGuess: []})
@@ -37,9 +35,9 @@ function Game() {
           } else {
             checkAgainstAnswer(guess, actual_word)
           }
+        //TODO: implement checkAgainstAnswer
         setGuess(g => ({guess: "", prevGuess: g.guess.push(guess)}))
-      }
-        } else if (press.match(/[a-z]/)) {
+      } else if (press.match(/[a-z]/)) {
           setGuess(g => ({...g, guess: g.guess + press}))
         }
     if (guess.length > 5) {
@@ -57,13 +55,32 @@ function Game() {
     )
 }
 
+// Gets the word of the day from word.mjs. Caluclated by taking the modulus of
+// # days since an arbitrary point in time (unix epoch) over # words in the
+// words list to ensure words are rotated each day.
+
+function wordOfTheDay() {
+  var now = new Date();
+  const millisec_in_one_day = 8.64e7
+  var fullDaysSinceEpoch = Math.floor(now/millisec_in_one_day);
+  return words[fullDaysSinceEpoch % words.length];
+  }
+
+// Square component updates content in each Square in Grid.
+
 function Square({onKey}) {
   return (
   <div className='square' type='text' maxLength={1}  onChange={() => {onKey()}}/>
   );
 }
 
-function Grid({ onKey }) {
+// Incomplete: Grid component creates grid structure.
+
+function Grid({ onKey, guess, prevGuess }) {
+
+  // TODO: add guess and prevGuess into grid and fill with ' '
+  // until size is 6 rows, 5 columns.
+
   var row_size = [...Array(6).fill('')];
   var col_size = [...Array(5).fill('')];
 
@@ -76,14 +93,18 @@ function Grid({ onKey }) {
   })
   };
 
-function Key({ legend, onKey }) {
+// Key component handles each Key in the Keyboard
 
+function Key({ legend, onKey }) {
   return (
     <button className='key' onClick={() => {onKey(legend)}}>
     {legend}
     </button>
   )
 }
+
+//Keyboard component structures the on-screen keyboard and takes input from
+// physical and software keyboard.
 
 function Keyboard ({ onKey }) {
   useEffect(() => {
