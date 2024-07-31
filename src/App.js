@@ -42,7 +42,7 @@ function Game() {
         } else if (press.match(/[a-z]/)) {
           setGuess(g => ({...g, guess: g.guess + press}))
         }
-    if (guess.length >= 5) {
+    if (guess.length > 5) {
       alert('too many letters')
       setGuess(g => ({...g,  guess: g.guess.slice(0, -1) }))
     };
