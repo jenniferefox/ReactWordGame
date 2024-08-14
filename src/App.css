@@ -4,7 +4,7 @@
 
 .App-header {
   background-color: #282c34;
-  min-height: 5em;
+  min-height: 4em;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -15,7 +15,6 @@
 
 .square {
   border: 0.1em solid #999;
-  float: centre;
   font-size: 1.5em;
   font-weight: bold;
   width: 2.5em;
@@ -24,16 +23,10 @@
   text-align: center;
   border-radius:0.2em;
   margin: 0.04em;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   text-transform: uppercase;
-}
-
-.grid-row:before {
-  clear: both;
-  content: '';
-  display: table;
-  padding: 2px;
+  display: inline-block;
 }
 
 .key {
@@ -45,6 +38,7 @@
   text-align: center;
   border-radius:0.3em;
   margin: 0.1em;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
+  cursor: pointer;
 }
