@@ -2,6 +2,8 @@ import {useState} from "react"
 import Keyboard from "./Keyboard"
 import wordOfTheDay from './Words';
 
+const word_length = 5
+
 export default function Game() {
   // Current guess
   const [guess, setGuess] = useState("");
@@ -17,11 +19,12 @@ export default function Game() {
       if (guess.length === answer_word.length) {
         checkAgainstAnswer({guess, answer_word})
         setGuesses(prevGuesses => ({...prevGuesses, guess}))
+      if (guess.length === word_length) {
         setGuess("")
       } else {
         alert('Enter a 5-letter word')
       }
-    } else if (guess.length === 5) {
+    } else if (guess.length === word_length) {
       alert('Too many letters')
     } else if (press.match(/^[a-zA-Z]$/)) {
       setGuess(g => g + press)
