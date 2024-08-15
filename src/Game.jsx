@@ -8,8 +8,8 @@ export default function Game() {
   // List of prev guesses
   const [guesses, setGuesses] = useState([]);
   // Word of the day to guess
-  const answer_word = wordOfTheDay();
-
+  const answer_word = wordOfTheDay().toUpperCase()
+  console.log(answer_word)
   const onKey = (press) => {
     if (press === 'Backspace' || press === 'Del') {
         setGuess(prevGuess => prevGuess.slice(0, -1))
