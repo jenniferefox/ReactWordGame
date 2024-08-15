@@ -10,7 +10,7 @@ export default function Keyboard (props) {
       } else if (e.key === 'Enter') {
         props.onKey("Enter")
       } else if (e.key.match(/[a-zA-Z]/)) {
-        props.onKey(e.key)
+        props.onKey(e.key.toUpperCase())
       };
       };
 
