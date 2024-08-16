@@ -131,7 +131,7 @@ function EmptyRow() {
 
 function Square(props) {
   return (
-    <div className='square' type='text'>
+    <div className='square' type='text' validation={props.validation}>
       {props.letter}
     </div>
   )
