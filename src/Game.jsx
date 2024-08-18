@@ -10,38 +10,32 @@ export default function Game() {
   // List of prev guesses
   const [guesses, setGuesses] = useState([]);
   // Word of the day to guess
-  const answer_word = wordOfTheDay().toUpperCase()
-  console.log(answer_word)
+  const answerWord = wordOfTheDay().toUpperCase()
   const onKey = (press) => {
     if (press === 'Backspace' || press === 'Del') {
         setGuess(prevGuess => prevGuess.slice(0, -1))
     } else if (press === 'Enter') {
-      if (guess.length === answer_word.length) {
-        checkAgainstAnswer({guess, answer_word})
-        setGuesses(prevGuesses => ({...prevGuesses, guess}))
       if (guess.length === word_length) {
+        setGuesses(prevGuesses => [...prevGuesses, guess])
         setGuess("")
       } else {
         alert('Enter a 5-letter word')
       }
-    } else if (guess.length === word_length) {
-      alert('Too many letters')
-    } else if (press.match(/^[a-zA-Z]$/)) {
+    } else if (guess.length < word_length && press.match(/^[a-zA-Z]$/)) {
       setGuess(g => g + press)
       }
     };
-
   return (
     <div>
-      <OldGuesses prevGuesses={guesses}/>
-      <CurrentGuess currentGuess={guess}/>
+      <OldGuesses prevGuesses={guesses} answerWord={answerWord}/>
+      <CurrentGuess currentGuess={guess} answerWord={answerWord}/>
       <EmptyRows prevGuesses={guesses}/>
-      <p></p>
-      <Keyboard onKey={onKey} />
+      <Keyboard onKey={onKey} prevGuesses={guesses} answerWord={answerWord}/>
     </div>
   )
 };
 
+// Function to check input against word of the day and return
 // correct, incorrect or almost correct.
 // 2 passes to:
 // 1. check for correct letters in correct position
@@ -72,7 +66,7 @@ function checkAgainstAnswer(guess, answerWord) {
 
 
 function OldGuesses(props) {
-  const previousGuesses = Array.isArray(props.prevGuesses) && props.prevGuesses?.map((item, index) => <PrevGuessRow value={item} key={index}/>)
+  const previousGuesses = Array.isArray(props.prevGuesses) && props.prevGuesses?.map((item, index) => <PrevGuessRow value={item} key={index} answerWord={props.answerWord}/>)
   return(
     <div>
       {previousGuesses}
@@ -81,9 +75,11 @@ function OldGuesses(props) {
 };
 
 function PrevGuessRow(props) {
-  const squares = props.value.map((val, index) => <Square letter={val} key={index}/>)
+  // const oldGuessToStringList = props.value.split("")
+  const validation = checkAgainstAnswer(props.value, props.answerWord);
+  const squares = props.value.split("").map((val, index) => <Square letter={val} validation={validation[index]} key={index}/>)
   return(
-    <div>
+    <div className="row">
       {squares}
     </div>
   )
@@ -91,22 +87,25 @@ function PrevGuessRow(props) {
 
 function CurrentGuess(props) {
   const currGuess = (props.currentGuess).padEnd(5," ")
-  const currSquares = currGuess.split("").map((s, index) => <Square letter={s} key={index}/>)
   return(
-    <div>
-      {currSquares}
+    <div className="row">
+      {currGuess.split("").map((g, i) => {
+        return (
+          <Square
+            letter={g || " "}
+            key={i}
+          />
+        );
+      })}
     </div>
   )
 };
 
 function EmptyRows(props) {
-  const emptyCount = 5 - (props.prevGuesses.length)
-  console.log(emptyCount)
-  if (emptyCount === 0) {
-    return 0
-  } else {
-  const emptyRows = [...Array(emptyCount).keys()]
-  const empties = emptyRows.map((val, index) => <EmptyRow key={index}/>)
+  const emptyCount = 5 - props.prevGuesses.length
+  if (emptyCount !== 0) {
+    const emptyRows = [...Array(emptyCount).keys()]
+    const empties = emptyRows.map((val, index) => <EmptyRow key={index}/>)
   return (
     <div>
       {empties}
@@ -118,15 +117,25 @@ function EmptyRow() {
   const letterCount = [...Array(5).keys()]
   const emptySquares = letterCount.map((val, index) => <Square letter={" "} key={index}/>)
   return (
-    <div>
+    <div className="row">
       {emptySquares}
     </div>
   )
 };
 
 function Square(props) {
+  const CLASS = {
+    "T": "true",
+    "F": "false",
+    "A": "almost",
+  };
+
+  const className = props.validation
+    ? "square " + CLASS[props.validation]
+    : "square";
+
   return (
-    <div className='square' type='text' validation={props.validation}>
+    <div className={className}>
       {props.letter}
     </div>
   )
