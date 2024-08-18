@@ -1,5 +1,6 @@
 import {useState} from "react"
 import Keyboard from "./Keyboard"
+import checkAgainstAnswer from "./checkAgainstAnswer"
 import {wordOfTheDay, congrats} from './Words';
 import toast, { Toaster } from 'react-hot-toast';
 import Confetti from "react-confetti"
@@ -33,6 +34,7 @@ export default function Game() {
       setGuess(g => g + press)
       }
     };
+
   return (
     <div>
       <Toaster
@@ -40,10 +42,11 @@ export default function Game() {
           top: 60,
         }}
       />
-      <OldGuesses prevGuesses={guesses} answerWord={answerWord}/>
-      <CurrentGuess currentGuess={guess} answerWord={answerWord}/>
-      <EmptyRows prevGuesses={guesses}/>
-      <Keyboard onKey={onKey} prevGuesses={guesses} answerWord={answerWord}/>
+        <OldGuesses prevGuesses={guesses} answerWord={answerWord}/>
+        {guesses.length < 6 && <CurrentGuess currentGuess={guess} answerWord={answerWord}/>}
+        {guesses.length < 6 && <EmptyRows prevGuesses={guesses}/>}
+      </div>
+      <Keyboard className="keyboard" onKey={onKey} prevGuesses={guesses} answerWord={answerWord}/>
       {(guesses[guesses.length-1] === answerWord) && <Confetti />}
     </div>
   )
@@ -54,30 +57,6 @@ export default function Game() {
 // 2 passes to:
 // 1. check for correct letters in correct position
 // 2. to then check for remaining correct letters in incorrect position
-
-function checkAgainstAnswer(guess, answerWord) {
-  let currentGuess = guess.split("");
-  let remainingLettersInWord = answerWord.split("");
-  let result = ['false', 'false', 'false', 'false', 'false'];
-  for (let i = 0; i < guess.length; i++) {
-    if (guess[i] === answerWord[i]) {
-      result.splice(i, 1,'true');
-      remainingLettersInWord.splice(i, 1," ");
-      currentGuess.splice(i, 1, " ")
-    };
-  };
-
-  for (let j = 0; j < guess.length; j++) {
-    if (currentGuess[j] != " ") {
-      if (remainingLettersInWord.includes(currentGuess[j])) {
-        remainingLettersInWord.splice(remainingLettersInWord.lastIndexOf(currentGuess[j]),1, " ")
-        result.splice(j, 1,'almost');
-    }
-  }
-  }
-  return result;
-};
-
 
 function OldGuesses(props) {
   const previousGuesses = Array.isArray(props.prevGuesses) && props.prevGuesses?.map((item, index) => <PrevGuessRow value={item} key={index} answerWord={props.answerWord}/>)
