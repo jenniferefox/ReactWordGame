@@ -1,6 +1,8 @@
 import {useState} from "react"
 import Keyboard from "./Keyboard"
-import wordOfTheDay from './Words';
+import {wordOfTheDay, congrats} from './Words';
+import toast, { Toaster } from 'react-hot-toast';
+import Confetti from "react-confetti"
 
 const word_length = 5
 
@@ -10,16 +12,22 @@ export default function Game() {
   // List of prev guesses
   const [guesses, setGuesses] = useState([]);
   // Word of the day to guess
-  const answerWord = wordOfTheDay().toUpperCase()
+  const [answerWord, setAnswerWord] = useState(wordOfTheDay().toUpperCase())
   const onKey = (press) => {
+    if (guess === "" && guesses[guesses.length-1] === answerWord) {
+      return guess, guesses
+    }
     if (press === 'Backspace' || press === 'Del') {
         setGuess(prevGuess => prevGuess.slice(0, -1))
     } else if (press === 'Enter') {
       if (guess.length === word_length) {
         setGuesses(prevGuesses => [...prevGuesses, guess])
+        if (guess === answerWord) {
+          toast(`${congrats()}, you win!`)
+        }
         setGuess("")
       } else {
-        alert('Enter a 5-letter word')
+        toast('Enter a 5-letter word')
       }
     } else if (guess.length < word_length && press.match(/^[a-zA-Z]$/)) {
       setGuess(g => g + press)
@@ -27,10 +35,16 @@ export default function Game() {
     };
   return (
     <div>
+      <Toaster
+        containerStyle={{
+          top: 60,
+        }}
+      />
       <OldGuesses prevGuesses={guesses} answerWord={answerWord}/>
       <CurrentGuess currentGuess={guess} answerWord={answerWord}/>
       <EmptyRows prevGuesses={guesses}/>
       <Keyboard onKey={onKey} prevGuesses={guesses} answerWord={answerWord}/>
+      {(guesses[guesses.length-1] === answerWord) && <Confetti />}
     </div>
   )
 };
@@ -44,10 +58,10 @@ export default function Game() {
 function checkAgainstAnswer(guess, answerWord) {
   let currentGuess = guess.split("");
   let remainingLettersInWord = answerWord.split("");
-  let result = ['F', 'F', 'F', 'F', 'F'];
+  let result = ['false', 'false', 'false', 'false', 'false'];
   for (let i = 0; i < guess.length; i++) {
     if (guess[i] === answerWord[i]) {
-      result.splice(i, 1,'T');
+      result.splice(i, 1,'true');
       remainingLettersInWord.splice(i, 1," ");
       currentGuess.splice(i, 1, " ")
     };
@@ -57,7 +71,7 @@ function checkAgainstAnswer(guess, answerWord) {
     if (currentGuess[j] != " ") {
       if (remainingLettersInWord.includes(currentGuess[j])) {
         remainingLettersInWord.splice(remainingLettersInWord.lastIndexOf(currentGuess[j]),1, " ")
-        result.splice(j, 1,'A');
+        result.splice(j, 1,'almost');
     }
   }
   }
@@ -75,7 +89,6 @@ function OldGuesses(props) {
 };
 
 function PrevGuessRow(props) {
-  // const oldGuessToStringList = props.value.split("")
   const validation = checkAgainstAnswer(props.value, props.answerWord);
   const squares = props.value.split("").map((val, index) => <Square letter={val} validation={validation[index]} key={index}/>)
   return(
@@ -124,14 +137,9 @@ function EmptyRow() {
 };
 
 function Square(props) {
-  const CLASS = {
-    "T": "true",
-    "F": "false",
-    "A": "almost",
-  };
 
   const className = props.validation
-    ? "square " + CLASS[props.validation]
+    ? "square " + props.validation
     : "square";
 
   return (

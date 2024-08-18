@@ -2,11 +2,17 @@
 // # days since an arbitrary point in time (unix epoch) over # words in the
 // words list to ensure words are rotated each day.
 
-export default function wordOfTheDay() {
+export {wordOfTheDay, congrats}
+
+function wordOfTheDay() {
   var now = new Date();
   const millisec_in_one_day = 8.64e7
   var fullDaysSinceEpoch = Math.floor(now/millisec_in_one_day);
   return words[fullDaysSinceEpoch % words.length];
+  }
+
+function congrats() {
+  return congrats_synonyms[(Math.floor(Math.random() * congrats_synonyms.length))]
   }
 
 //List of the most common 5 letter words, obtained using claude.ai.
@@ -49,3 +55,26 @@ const words = [
     "guide", "winds", "block", "grain", "smoke", "mixed", "games", "wagon", "sweet", "topic",
     "extra", "plate", "title", "knife", "fence", "falls", "cloud", "wheat", "plays", "enter",
     "broad", "steam", "atoms", "press", "lying"];
+
+    const congrats_synonyms = [
+      "Amazing",
+      "Excellent",
+      "Exceptional",
+      "Extraordinary",
+      "Fabulous",
+      "Great",
+      "Incredible",
+      "Marvelous",
+      "Outstanding",
+      "Phenomenal",
+      "Splendid",
+      "Superb",
+      "Terrific",
+      "Wonderful",
+      "Brilliant",
+      "Impressive",
+      "Remarkable",
+      "Stellar",
+      "Sublime",
+      "Top-notch"
+    ];
