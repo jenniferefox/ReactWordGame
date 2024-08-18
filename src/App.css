@@ -12,15 +12,22 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
-.current_guess {
+
+.row {
   display: flex;
   justify-content: center;
-
 }
 
-.prev_guess_row {
-  display: flex;
-  justify-content: center;
+.square.false {
+  background-color: grey;
+}
+
+.square.true {
+  background-color: green;
+}
+
+.square.almost {
+  background-color: yellow;
 }
 
 .square {
