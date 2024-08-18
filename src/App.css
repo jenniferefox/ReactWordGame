@@ -11,6 +11,7 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  margin-bottom: 1em
 }
 
 .row {
@@ -19,15 +20,15 @@
 }
 
 .square.false {
-  background-color: grey;
+  background-color: rgb(59, 59, 59);
 }
 
 .square.true {
-  background-color: green;
+  background-color: rgb(151, 228, 126);
 }
 
 .square.almost {
-  background-color: yellow;
+  background-color: rgb(253, 252, 150);
 }
 
 .square {
@@ -59,4 +60,20 @@
   flex-direction: column;
   justify-content: center;
   cursor: pointer;
+}
+
+.key.false {
+  background-color: rgb(59, 59, 59);
+}
+
+.key.true {
+  background-color: rgb(151, 228, 126);
+}
+
+.key.almost {
+  background-color: rgb(253, 252, 150);
+}
+
+.grid {
+  margin-bottom: 2em;
 }

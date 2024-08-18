@@ -42,6 +42,7 @@ export default function Game() {
           top: 60,
         }}
       />
+      <div className="grid">
         <OldGuesses prevGuesses={guesses} answerWord={answerWord}/>
         {guesses.length < 6 && <CurrentGuess currentGuess={guess} answerWord={answerWord}/>}
         {guesses.length < 6 && <EmptyRows prevGuesses={guesses}/>}
