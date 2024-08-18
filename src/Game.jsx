@@ -42,36 +42,31 @@ export default function Game() {
   )
 };
 
-// Incomplete. Function to check input against word of the day and return
 // correct, incorrect or almost correct.
-// 2 passes to 1. check for correct letters in correct position
+// 2 passes to:
+// 1. check for correct letters in correct position
 // 2. to then check for remaining correct letters in incorrect position
 
-function checkAgainstAnswer({ guess, answer_word }) {
-  let currentGuess = guess;
-  let remainingLettersInWord = answer_word;
+function checkAgainstAnswer(guess, answerWord) {
+  let currentGuess = guess.split("");
+  let remainingLettersInWord = answerWord.split("");
   let result = ['F', 'F', 'F', 'F', 'F'];
   for (let i = 0; i < guess.length; i++) {
-    if (guess[i] === answer_word[i]) {
-      console.log('correct letter')
+    if (guess[i] === answerWord[i]) {
       result.splice(i, 1,'T');
-      remainingLettersInWord.splice(i, 1,"");
+      remainingLettersInWord.splice(i, 1," ");
+      currentGuess.splice(i, 1, " ")
     };
+  };
 
   for (let j = 0; j < guess.length; j++) {
-    if (remainingLettersInWord[j] != '') {
+    if (currentGuess[j] != " ") {
       if (remainingLettersInWord.includes(currentGuess[j])) {
-        remainingLettersInWord = remainingLettersInWord.replace(guess[i], "")
+        remainingLettersInWord.splice(remainingLettersInWord.lastIndexOf(currentGuess[j]),1, " ")
         result.splice(j, 1,'A');
-        console.log('correct letter, incorrect position')
     }
-      } else {
-        console.log('incorrect letter')
-        result = result.push('F');
-      }
   }
   }
-  console.log(result)
   return result;
 };
 
