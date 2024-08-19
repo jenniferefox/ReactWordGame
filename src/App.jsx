@@ -9,7 +9,7 @@ export default function App() {
     <div className="App">
       <header className="App-header">
         <p>
-          You have 6 attempts to guess the correct 5 letter word.
+          You have 6 attempts to guess the correct 5-letter word.
         </p>
       </header>
       <div>
