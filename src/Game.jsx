@@ -4,6 +4,7 @@ import checkAgainstAnswer from "./checkAgainstAnswer"
 import {wordOfTheDay, congrats} from './Words';
 import toast, { Toaster } from 'react-hot-toast';
 import Confetti from "react-confetti"
+import { fiveLetterWords } from "./fiveLetterWords";
 
 const word_length = 5
 
@@ -13,23 +14,36 @@ export default function Game() {
   // List of prev guesses
   const [guesses, setGuesses] = useState([]);
   // Word of the day to guess
-  const [answerWord, setAnswerWord] = useState(wordOfTheDay().toUpperCase())
+  const [answerWord, ] = useState(wordOfTheDay().toUpperCase());
+
   const onKey = (press) => {
     if (guess === "" && guesses[guesses.length-1] === answerWord) {
       return guess, guesses
     }
+    if (guess === "" && guesses.length === 6 && guesses[guesses.length-1] !== answerWord) {
+      return guess, guesses
+    }
     if (press === 'Backspace' || press === 'Del') {
-        setGuess(prevGuess => prevGuess.slice(0, -1))
+      setGuess(prevGuess => prevGuess.slice(0, -1))
     } else if (press === 'Enter') {
-      if (guess.length === word_length) {
+      if (!(fiveLetterWords.includes(guess.toLowerCase()))) {
+        toast("Not a word!")
+        setGuess("")
+      }
+      if (guesses.includes(guess)) {
+        toast("Use another word!")
+        setGuess("")
+      } else if (guess.length === word_length) {
         setGuesses(prevGuesses => [...prevGuesses, guess])
         if (guess === answerWord) {
           toast(`${congrats()}, you win!`)
+        } else if (guesses.length === 5) {
+          toast('Booo, you lose!')
         }
         setGuess("")
-      } else {
+        } else {
         toast('Enter a 5-letter word')
-      }
+        }
     } else if (guess.length < word_length && press.match(/^[a-zA-Z]$/)) {
       setGuess(g => g + press)
       }
