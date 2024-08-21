@@ -6,7 +6,8 @@ import toast, { Toaster } from 'react-hot-toast';
 import Confetti from "react-confetti"
 import { fiveLetterWords } from "./fiveLetterWords";
 
-const word_length = 5
+const wordLength = 5;
+const rowCount = 6;
 
 export default function Game() {
   // Current guess
@@ -20,7 +21,7 @@ export default function Game() {
     if (guess === "" && guesses[guesses.length-1] === answerWord) {
       return guess, guesses
     }
-    if (guess === "" && guesses.length === 6 && guesses[guesses.length-1] !== answerWord) {
+    if (guess === "" && guesses.length === rowCount && guesses[guesses.length-1] !== answerWord) {
       return guess, guesses
     }
     if (press === 'Backspace' || press === 'Del') {
@@ -32,18 +33,18 @@ export default function Game() {
       } else if (guesses.includes(guess)) {
         toast("Use another word!")
         setGuess("")
-      } else if (guess.length === word_length) {
+      } else if (guess.length === wordLength) {
         setGuesses(prevGuesses => [...prevGuesses, guess])
         if (guess === answerWord) {
           toast(`${congrats()}, you win!`)
-        } else if (guesses.length === 5) {
+        } else if (guesses.length === wordLength) {
           toast('Booo, you lose!')
         }
         setGuess("")
         } else {
         toast('Enter a 5-letter word')
         }
-    } else if (guess.length < word_length && press.match(/^[a-zA-Z]$/)) {
+    } else if (guess.length < wordLength && press.match(/^[a-zA-Z]$/)) {
       setGuess(g => g + press)
       }
     };
@@ -57,8 +58,8 @@ export default function Game() {
       />
       <div className="grid">
         <OldGuesses prevGuesses={guesses} answerWord={answerWord}/>
-        {guesses.length < 6 && <CurrentGuess currentGuess={guess} answerWord={answerWord}/>}
-        {guesses.length < 6 && <EmptyRows prevGuesses={guesses}/>}
+        {guesses.length < rowCount && <CurrentGuess currentGuess={guess} answerWord={answerWord}/>}
+        {guesses.length < rowCount && <EmptyRows prevGuesses={guesses}/>}
       </div>
       <Keyboard className="keyboard" onKey={onKey} prevGuesses={guesses} answerWord={answerWord}/>
       {(guesses[guesses.length-1] === answerWord) && <Confetti />}
@@ -92,7 +93,7 @@ function PrevGuessRow(props) {
 };
 
 function CurrentGuess(props) {
-  const currGuess = (props.currentGuess).padEnd(5," ")
+  const currGuess = (props.currentGuess).padEnd(wordLength," ")
   return(
     <div className="row">
       {currGuess.split("").map((g, i) => {
@@ -120,7 +121,7 @@ function EmptyRows(props) {
 }};
 
 function EmptyRow() {
-  const letterCount = [...Array(5).keys()]
+  const letterCount = [...Array(wordLength).keys()]
   const emptySquares = letterCount.map((val, index) => <Square letter={" "} key={index}/>)
   return (
     <div className="row">
