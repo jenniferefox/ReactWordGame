@@ -1,4 +1,4 @@
-// Gets the word of the day Caluclated by taking the modulus of
+// Gets the word of the day. Caluclated by taking the modulus of
 // # days since an arbitrary point in time (unix epoch) over # words in the
 // words list to ensure words are rotated each day.
 
@@ -13,7 +13,7 @@ function wordOfTheDay() {
 
 function congrats() {
   return congrats_synonyms[(Math.floor(Math.random() * congrats_synonyms.length))]
-  }
+  };
 
 //List of the most common 5 letter words, obtained using claude.ai.
 
