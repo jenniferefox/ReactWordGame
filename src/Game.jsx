@@ -29,8 +29,7 @@ export default function Game() {
       if (!(fiveLetterWords.includes(guess.toLowerCase()))) {
         toast("Not a word!")
         setGuess("")
-      }
-      if (guesses.includes(guess)) {
+      } else if (guesses.includes(guess)) {
         toast("Use another word!")
         setGuess("")
       } else if (guess.length === word_length) {
