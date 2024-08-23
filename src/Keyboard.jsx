@@ -39,6 +39,8 @@ export default function Keyboard (props) {
   });
 }
 
+//Updates key colours according to previous Guesses
+
 function keyColourUpdate(prevGuesses, answerWord) {
   const KEYCOL = new Map()
   for (let k = 0; k < prevGuesses.length; k++) {

@@ -1,3 +1,9 @@
+// Function to check input against word of the day and return
+// correct, incorrect or almost correct.
+// 2 passes to:
+//  1. check for correct letters in correct position
+//  2. to then check for remaining correct letters in incorrect position
+
 export default function checkAgainstAnswer(guess, answerWord) {
   let currentGuess = guess.split("");
   let remainingLettersInWord = answerWord.split("");

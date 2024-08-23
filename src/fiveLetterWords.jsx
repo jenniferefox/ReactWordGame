@@ -1,3 +1,5 @@
+//List of all 5-letter words to verify that input is valid
+
 export const fiveLetterWords = [
     "which",
     "there",
