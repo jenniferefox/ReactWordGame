@@ -13,9 +13,21 @@ export default function Game() {
   // Current guess
   const [guess, setGuess] = useState("");
   // List of prev guesses
-  const [guesses, setGuesses] = useState([]);
+  const [guesses, setGuesses] = useState(JSON.parse(localStorage.getItem('guesses')) || []);
   // Word of the day to guess
   const [answerWord, ] = useState(wordOfTheDay().toUpperCase());
+
+  function getOffset() {
+    return Math.floor(Date.now()/(1000*60*60*24))
+  }
+  const today = getOffset()
+  console.log(JSON.parse(localStorage.getItem('guesses')))
+
+  const localStore = JSON.parse(localStorage.getItem('guesses'));
+  const timestamp = JSON.parse(localStorage.getItem('timestamp'))
+  if (localStore && timestamp < today) {
+    localStorage.removeItem('guesses');
+  }
 
   //determines what happens when a key is pressed (for both software and physical keyboard)
   const onKey = (press) => {
@@ -35,7 +47,13 @@ export default function Game() {
         toast("Use another word!")
         setGuess("")
       } else if (guess.length === wordLength) {
-        setGuesses(prevGuesses => [...prevGuesses, guess])
+        setGuesses(prevGuesses => {
+         const guesses = [...prevGuesses, guess];
+         localStorage.setItem('guesses', JSON.stringify(guesses));
+         localStorage.setItem('timestamp', JSON.stringify(today));
+         console.log('storage updated', guesses)
+         return guesses
+        })
         if (guess === answerWord) {
           toast(`${congrats()}, you win!`)
         } else if (guesses.length === wordLength) {
