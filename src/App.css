@@ -64,6 +64,11 @@
 
 }
 
+.key-row {
+  display: flex;
+  justify-content: center;
+}
+
 .key.false {
   background-color: rgb(59, 59, 59);
 }
