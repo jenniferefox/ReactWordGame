@@ -29,7 +29,7 @@ export default function Game() {
       setGuess(prevGuess => prevGuess.slice(0, -1))
     } else if (press === 'Enter') {
       if (!(fiveLetterWords.includes(guess.toLowerCase()))) {
-        toast("Not a word!")
+        toast("Not in word list!")
         setGuess("")
       } else if (guesses.includes(guess)) {
         toast("Use another word!")
