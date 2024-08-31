@@ -5,9 +5,9 @@
 export {wordOfTheDay, congrats}
 
 function wordOfTheDay() {
-  var now = new Date();
+  const now = new Date();
   const millisec_in_one_day = 8.64e7
-  var fullDaysSinceEpoch = Math.floor(now/millisec_in_one_day);
+  const fullDaysSinceEpoch = Math.floor(now/millisec_in_one_day);
   return words[fullDaysSinceEpoch % words.length];
   }
 
